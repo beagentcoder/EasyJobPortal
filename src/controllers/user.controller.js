@@ -13,20 +13,13 @@ export default class UserController{
         const {email, password} = req.body;
         const user=UserModal.isValidUser(email, password)
         if(!user){
-           return  res.send(`
-            
-                <script>
-                    alert('Inavalid Creds')
-                    window.location.href = '/login';
-                    // setTimeout(function() {
-                    //     window.location.href = '/login';
-                    // }, 100); // Redirect after .5 seconds     if instead of alert any msg u want to show
-                </script>
-            `);
+          res.render("login", { errorMessage: "Invalid Credentials" });
+          
         }
         else {
             req.session.name=user.name.toUpperCase()
-            req.session.userEmail=email;
+            req.session.userEmail=user.email.toLowerCase();
+            console.log(req.session.userEmail)
             res.redirect('/jobs')
         }
        

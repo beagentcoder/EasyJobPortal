@@ -104,12 +104,12 @@ export default class JobModel {
     } else {
       console.log("Job not found with id:", id);
     }
-    return;
   }
+
   static searchJobs(name){
     name=name.toLowerCase()
     const data=jobs.filter((job)=>{
-      if(name ==job.jobCategory.toLowerCase() || name ==job.jobDesignation.toLowerCase() ||name == job.jobLocation.toLowerCase){
+      if(name ==job.jobCategory.toLowerCase() || name ==job.jobDesignation.toLowerCase() ||name == job.jobLocation.toLowerCase() ||name==job.companyName.toLowerCase()){
         return job;
       }
     })
@@ -152,7 +152,7 @@ let jobs = [
     skillsRequired: ["HTML", "CSS", "JavaScript"],
     numberOfOpenings: 2,
     jobPosted: "2022-02-01",
-    recruiterEmail:"def@gmail.com",
+    recruiterEmail:"krvivi28@gmail.com",
     applicants: [],
   },
   {

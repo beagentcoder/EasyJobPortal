@@ -1,6 +1,6 @@
 <div style="color: black;" class="container p-3 mx-auto w-50 form-box my-5 rounded-md">
   <h2 style="color: #181642" class="text-center mb-3">Update Job</h2>
-  <form action="/job/update/<%= job.id %>" method="post" id="updateJobForm">
+  <form action="/job/update/<%= job.id %>" method="post">
     <div class="input-group mb-3">
       <select
         required
@@ -119,11 +119,4 @@
     </button>
   </form>
 </div>
-<script>
-  document.getElementById('updateJobForm').onsubmit = function(e) {
-    const result = confirm("Are you sure you want to update the job details?");
-    if (!result) {
-      e.preventDefault(); // Prevent form submission if user cancels
-    }
-  };
-</script>
+

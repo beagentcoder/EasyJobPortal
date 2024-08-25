@@ -1,26 +1,44 @@
-
-<div class="wrapper fadeInDown">
-    <div id="formContent">
-      <!-- Tabs Titles -->
-  
-      <!-- Icon -->
-      <div class="fadeIn first">
-        <img src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png" style="height: 50px;width: 50px;" id="icon" alt="User Icon" />
+<% if (Array.isArray(errorMessage)) { %>
+  <% if (errorMessage.length > 0) { %>      
+    <% errorMessage.forEach(err => { %>
+      <div class="alert alert-danger" role="alert">
+        <%= err.msg %>
       </div>
-  
-      <!-- Login Form -->
-      <form action="/login" method="post">
-        <input type="text" id="login" class="fadeIn second" name="email" placeholder="Email">
-        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-        <input type="submit" class="fadeIn fourth" value="Log In">
-      </form>
-  
-      <!-- Remind Passowrd -->
-      <div id="formFooter">
-        <a class="underlineHover" href="#">Forgot Password?</a>
-        <br><br>
-        <button  class="underlineHover" style="border: none;background: transparent;" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
-      </div>
-  
+    <% }); %>
+  <% } %>    
+<% } else { %>
+  <% if (errorMessage) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= errorMessage %>
     </div>
-  </div>
+  <% } %>
+<% } %>
+
+                  <div class="wrapper fadeInDown">
+                    <div id="formContent">
+                      <!-- Tabs Titles -->
+
+                      <!-- Icon -->
+                      <div class="fadeIn first">
+                        <img src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png"
+                          style="height: 50px;width: 50px;" id="icon" alt="User Icon" />
+                      </div>
+
+                      <!-- Login Form -->
+                      <form action="/login" method="post">
+                        <input type="text" id="login" class="fadeIn second" name="email" placeholder="Email">
+                        <input type="password" id="password" class="fadeIn third" name="password"
+                          placeholder="password">
+                        <input type="submit" class="fadeIn fourth" value="Log In">
+                      </form>
+
+                      <!-- Remind Passowrd -->
+                      <div id="formFooter">
+                        <a class="underlineHover" href="#">Forgot Password?</a>
+                        <br><br>
+                        <button class="underlineHover" style="border: none;background: transparent;"
+                          data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                      </div>
+
+                    </div>
+                  </div>

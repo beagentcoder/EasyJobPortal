@@ -47,7 +47,7 @@ class PageController {
     const id = parseInt(req.params.id);
     const resumePath = "/uploads/" + req.file.filename;
     JobModel.addApplicant(id, name, email, contact, resumePath);
-
+    
     const transporter = nodemailer.createTransport({
       service: "Gmail", // Replace with your email service
       auth: {
@@ -70,6 +70,7 @@ class PageController {
         console.log("Email sent:", info.response);
       }
     });
+
     res.send(`
         <h1 style="position:relative;top:45%;left:35%">Application submitted successfully!</h1>
         <p style="position:relative;top:50%;left:40%">Redirecting to the jobs page in <span style="position:relative;top:50%;" id="countdown">5</span> seconds...</p>
@@ -90,7 +91,7 @@ class PageController {
     `);
   }
   showLogin(req, res, next) {
-    res.render("login", {
+    res.render("login", { errorMessage: null,
       userEmail: req.session.userEmail,
       name: req.session.name,
     });
@@ -102,6 +103,7 @@ class PageController {
     });
   }
   addNewJob(req, res) {
+    const recruiterEmail=req.session.userEmail
     const {
       jobCategory,
       jobDesignation,
@@ -110,8 +112,9 @@ class PageController {
       salary,
       numberOfOpenings,
       skillsRequired,
-      applyBy,
+      applyBy
     } = req.body;
+    
     JobModel.createJob(
       jobCategory,
       jobDesignation,
@@ -120,7 +123,8 @@ class PageController {
       salary,
       numberOfOpenings,
       skillsRequired,
-      applyBy
+      applyBy,
+      recruiterEmail
     );
     res.send(`
             
@@ -130,32 +134,31 @@ class PageController {
       </script>
   `);
   }
-  showUpdateJob(req, res) {
+  showUpdateJob(req,res){
     const id = parseInt(req.params.id);
     const job = JobModel.jobById(id);
-    if (!job) {
-      return res.status(404).send("Job not found");
-  }
     res.render("updateJob", {
       job,
       userEmail: req.session.userEmail,
       name: req.session.name,
     });
+   
   }
-  updateJob(req, res) {
-    const id = parseInt(req.params.id);
-    JobModel.updateJob(req.body, id);
-    res.redirect(`/jobs/${id}`);
+  updateJob(req,res){
+   const id = parseInt(req.params.id);
+    JobModel.updateJob(req.body,id)
+    res.redirect(`/jobs/${id}`)
+
   }
-  deleteJob(req, res) {
-    console;
+  deleteJob(req,res){
+    
     const id = parseInt(req.params.id);
-    const jobFound = JobModel.jobById(id);
-    if (!jobFound) {
+    const jobFound=JobModel.jobById(id)
+    if(!jobFound){
       return res.status(401).send("Job Not Found");
-    } else {
-      JobModel.delete(id);
-      res.redirect("/jobs");
+    }else{
+      JobModel.delete(id)
+     res.redirect('/jobs')
     }
   }
 
@@ -199,3 +202,9 @@ class PageController {
 }
 
 export default PageController;
+
+
+
+
+    
+  

@@ -8,7 +8,6 @@ export default class UserModal {
   static add(name, email, password) {
     const user = new UserModal(users.length + 1, name, email, password);
     users.push(user);
-    console.log(users)
     
   }
   static isValidUser(email, password) {
