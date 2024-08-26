@@ -19,7 +19,7 @@ export default class UserController{
         else {
             req.session.name=user.name.toUpperCase()
             req.session.userEmail=user.email.toLowerCase();
-            console.log(req.session.userEmail)
+            // console.log(req.session.userEmail)
             res.redirect('/jobs')
         }
        

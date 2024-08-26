@@ -20,7 +20,7 @@ export const validateRequest =async(req,res,next)=>
 
 export const validateJob =async(req,res,next)=>{
     const rules=[
-        body('jobCategory').notEmpty.withMessage('Job Category is Required'),
+        body('jobCategory').notEmpty().withMessage('Job Category is Required'),
         body('jobDesignation').notEmpty().withMessage('Job Designation is Required'),
         body('companyName').notEmpty().withMessage('Company Name is Required'),
         body('jobLocation').notEmpty().withMessage('Job Location is Required'),
